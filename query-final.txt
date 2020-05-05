@@ -1,0 +1,14 @@
+select 
+	vwe.TREE,
+	vwe.CODIGO,
+	vwe.COMPONENTE,
+	vwe.NIVEL,
+	vwe.B1_REVATU,
+	vwe.B1_ORIGEM,
+	vwe.G1_QUANT,
+	(SELECT SUM(vwp.VALOR_VENDA) FROM vwPrecos vwp WHERE vwe.CODIGO = vwp.CODIGO) AS 'PVENDA',
+	(SELECT SUM(vwp.VALOR_COMPRA) FROM vwPrecos vwp WHERE vwe.COMPONENTE = vwp.CODIGO) AS 'PCOMPRA'
+
+from vwEstruturas vwe
+
+ORDER BY vwe.TREE
